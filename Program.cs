@@ -132,22 +132,30 @@ class MainClass
 
                     int open = getPosition();                    
 
+
+                    
                     //OPEN LONG
                     if (jTrrend["data"][1]["trend"].ToString() == "SHORT" && jTrrend["data"][0]["trend"].ToString() == "LONG" && jTrrend["data"][0]["timestamp"].ToString() != codeTendency)
-                    {                        
+                    {
+
                         if (open < 0)
+                        {
                             open = Math.Abs(open);
 
-                        codeTendency = jTrrend["data"][0]["timestamp"].ToString();
-                        bitMEXApi.MarketOrder(pair, "Buy", qtdyContacts + open);
+                            codeTendency = jTrrend["data"][0]["timestamp"].ToString();
+                            bitMEXApi.MarketOrder(pair, "Buy", qtdyContacts + open);
+                        }
 
                     }
 
                     //OPEN SHORT
                     if (jTrrend["data"][1]["trend"].ToString() == "LONG" && jTrrend["data"][0]["trend"].ToString() == "SHORT" && jTrrend["data"][0]["timestamp"].ToString() != codeTendency)
-                    {                        
-                        codeTendency = jTrrend["data"][0]["timestamp"].ToString();
-                        bitMEXApi.MarketOrder(pair, "Sell", qtdyContacts + open);
+                    {
+                        if (open >= 0)
+                        {
+                            codeTendency = jTrrend["data"][0]["timestamp"].ToString();
+                            bitMEXApi.MarketOrder(pair, "Sell", qtdyContacts + open);
+                        }
                     }
 
                     log("wait " + interval + "ms", ConsoleColor.White);
