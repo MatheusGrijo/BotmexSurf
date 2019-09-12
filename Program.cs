@@ -135,10 +135,10 @@ class MainClass
 
                     
                     //OPEN LONG
-                    if (jTrrend["data"][1]["trend"].ToString() == "SHORT" && jTrrend["data"][0]["trend"].ToString() == "LONG" && jTrrend["data"][0]["timestamp"].ToString() != codeTendency)
+                    if (jTrrend["data"][0]["trend"].ToString() == "LONG" )
                     {
 
-                        if (open < 0)
+                        if (open <= 0)
                         {
                             open = Math.Abs(open);
 
@@ -149,7 +149,7 @@ class MainClass
                     }
 
                     //OPEN SHORT
-                    if (jTrrend["data"][1]["trend"].ToString() == "LONG" && jTrrend["data"][0]["trend"].ToString() == "SHORT" && jTrrend["data"][0]["timestamp"].ToString() != codeTendency)
+                    if (jTrrend["data"][0]["trend"].ToString() == "SHORT")
                     {
                         if (open >= 0)
                         {
